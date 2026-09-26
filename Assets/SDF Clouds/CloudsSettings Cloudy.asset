@@ -33,14 +33,16 @@ MonoBehaviour:
   useSunLight: 1
   sunlightAbsorption: 0.017
   lightMultiplier: 1
-  directionalScattering: 0.817
+  directionalScattering: 0.812
+  scatteringBias: 1
+  directionalScatteringScale: 0.25
   useAO: 1
   AO_Offset: 500
   AO_Intensity: 50
   enableShadows: 1
   softShadows: 1
   shadowColor: {r: 0, g: 0.09285736, b: 1, a: 1}
-  shadowMultiplier: 0.7
+  shadowMultiplier: 1
   fogDensity: 0.44
   fogDistance: 0
   renderScale: 1

@@ -35,6 +35,8 @@ public class CloudsSettings : ScriptableObject
     [Range(0, 1)] public float sunlightAbsorption = 0.25f;
     [Range(0, 2)] public float lightMultiplier = 1.0f;
     [Range(0, 1)] public float directionalScattering = 0.5f;
+    [Range(0, 2)] public float scatteringBias = 1.0f;
+    [Range(0, 5)] public float directionalScatteringScale = 0.25f;
 
     [Header("Ambient Occlusion")]
     public bool useAO = true;

@@ -148,6 +148,8 @@ public class CloudsPostProcess : PostProcessBase
         computeShader.SetFloats("_LightDir", new float[] { lightDir.x, lightDir.y, lightDir.z });
         computeShader.SetFloat("_SunLightAbsorption", cloudSettings.sunlightAbsorption);
         computeShader.SetFloat("_DirectionalScattering", cloudSettings.directionalScattering);
+        computeShader.SetFloat("_ScatteringBias", cloudSettings.scatteringBias);
+        computeShader.SetFloat("_DirectionalScatteringScale", cloudSettings.directionalScatteringScale);
 
         // Transmittance
         computeShader.SetTexture(rayMarchKernel, "_TransmittanceMap", transmittanceMap.MapRenderTexture);

@@ -43,6 +43,8 @@ float3 _CameraPos;
 
 // Lighting
 float _DirectionalScattering;
+float _ScatteringBias;
+float _DirectionalScatteringScale;
 float3 _LightDir;
 float _LightMinStepSize;
 float _SunLightAbsorption;
@@ -101,22 +103,18 @@ float computeUnityDepth(uint3 id)
 }
 
 // g = 0 causes uniform scattering while g = 1 causes directional scattering, in the direction of the photons
-float henyeyGreenstein(float angle, float g)
+float henyeyGreenstein(float cosTheta, float g)
 {
- 	float g2 = g * g;
- 	return (1 - g2) / (4 * 3.1415 * pow(1 + g2 - 2 * g * (angle), 1.5));
+    float g2 = g * g;
+    return (1 - g2) / (4 * UNITY_PI * pow(1 + g2 - 2 * g * cosTheta, 1.5));
 }
 
 // Amplifies brightness when the ray is directed towards the sun
 // https://fr.wikipedia.org/wiki/Fonction_de_phase_de_Henyey-Greenstein
-float phaseHG(float3 rayDir, float3 lightDir)
+float phaseHG(float3 rayDir, float3 dirToLight)
 {
- 	float angleBottom = dot(rayDir, lightDir);
- 	float angleTop = dot(lightDir, rayDir);
- 	float hgBottom = henyeyGreenstein(angleBottom, _DirectionalScattering);
- 	float hgTop = henyeyGreenstein(angleTop, _DirectionalScattering);
-    float hg = max(hgBottom, hgTop);
- 	return 0.9 + hg;
+    float hg = henyeyGreenstein(dot(rayDir, dirToLight), _DirectionalScattering);
+    return _ScatteringBias + _DirectionalScatteringScale * hg;
 }
 
 // Not used for now
@@ -149,7 +147,7 @@ cloudMarchResult cloudMarch(float3 rayPos, float3 rayDir, s_lightParams lightPar
     float3 currentPos = rayPos + rayDir * dstTravelled;
 
     float sdfValue = 0.1;
- 	float phaseVal = phaseHG(normalize(rayDir), normalize(-lightParams.lightDir)); // TODO: fix phaseHG
+ 	float phaseVal = phaseHG(normalize(rayDir), normalize(-lightParams.lightDir));
 
     int steps = 0;
 

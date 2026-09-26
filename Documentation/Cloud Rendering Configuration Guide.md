@@ -117,12 +117,14 @@ Left: erosion off, right: erosion on:
 ---
 ### Lighting
 
-| Parameter                | Description                                                                                                                      |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| `Use Sun Light`          | Enables the directional sunlight in the lighting model.                                                                          |
-| `Sunlight Absorption`    | Controls how much sunlight is absorbed by cloud particles. Higher values darken clouds and increase visual contrast.             |
+| Parameter                      | Description                                                                                                                                |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Use Sun Light`                | Enables the directional sunlight in the lighting model.                                                                                    |
+| `Sunlight Absorption`          | Controls how much sunlight is absorbed by cloud particles. Higher values darken clouds and increase visual contrast.                       |
 | `Directional Scattering` | Controls how strongly light is scattered forward. Higher values make clouds appear brighter when viewed toward the light source. |
-| `Light Multiplier`       | Multiplies the directional light color. Useful if the directional light intensity is not 1.0.                                    |
+| `Scattering Bias`              | Base amount of scattered light, identical in every viewing direction. Keeps clouds bright from all angles.                 |
+| `Directional Scattering Scale` | Multiplies the forward scattering glow created by `Directional Scattering`.                 |
+| `Light Multiplier`             | Multiplies the directional light color. Useful if the directional light intensity is not 1.0.                                              |
 
 Example of different `Sunlight Absorption` values:
 
