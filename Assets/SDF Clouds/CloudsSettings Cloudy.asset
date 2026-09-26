@@ -31,23 +31,23 @@ MonoBehaviour:
   erosionIntensity: 1
   erosionSpeed: {x: 5, y: -15, z: 5}
   useSunLight: 1
-  sunlightAbsorption: 0.01
+  sunlightAbsorption: 0.017
   lightMultiplier: 1
-  directionalScattering: 0.35
+  directionalScattering: 0.817
   useAO: 1
   AO_Offset: 500
-  AO_Intensity: 30
+  AO_Intensity: 50
   enableShadows: 1
-  softShadows: 0
-  shadowColor: {r: 0.14391243, g: 0.19778335, b: 0.6933962, a: 1}
-  shadowMultiplier: 0.6
-  fogDensity: 0.05
+  softShadows: 1
+  shadowColor: {r: 0, g: 0.09285736, b: 1, a: 1}
+  shadowMultiplier: 0.7
+  fogDensity: 0.44
   fogDistance: 0
   renderScale: 1
   renderDistance: 500000
   cloudMaxSteps: 500
   cloudMinStepSize: 25
-  fogStepSize: 250
+  fogStepSize: 500
   offsetNoiseIntensity: 75
   useSDFInsideClouds: 0
   sdfThreshold: 0

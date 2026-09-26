@@ -136,18 +136,11 @@ float increaseStepSize(float stepSize, float dstFromCamera)
 
 cloudMarchResult cloudMarch(float3 rayPos, float3 rayDir, s_lightParams lightParams, s_rayMarchParams rayParams, s_cloudParams cloudParams, s_erosionParams erosionParams, rayBoxInfo cloudsBoxInfo, rayBoxInfo fogBoxInfo, float depthDist = 1e10, float offset = 0)
 {
-    // Find the exact distance where fog reaches a threshold
-    // Fog equation : density * distance * distance > threshold
-    // Solving for distance, assuming it is always positive : distance > sqrt(threshold / density);
-    // This operation is useful to advance the ray exactly where the fog appears, skipping big areas and improving performance
-    float fogThreshold = 0.00001;
-    float fogStart = sqrt(fogThreshold / _FogDensity);
-    
     // Assume fog box is bigger than cloud box
     float dstTravelled = fogBoxInfo.dstToBox + 0.1 + offset; // + 0.1 to make sure the ray is inside the box
     
     // Skip steps before fog appears
-    dstTravelled += min(fogStart, cloudsBoxInfo.dstToBox - fogBoxInfo.dstToBox + 0.1); // + 0.1 to make sure we ray is inside the box
+    dstTravelled += min(_FogDistance, cloudsBoxInfo.dstToBox - fogBoxInfo.dstToBox + 0.1); // + 0.1 to make sure the ray is inside the box
 
     cloudMarchResult res;
     res.transmittance = 1;
@@ -250,11 +243,11 @@ cloudMarchResult cloudMarch(float3 rayPos, float3 rayDir, s_lightParams lightPar
         
         // Add fog
         float fogDistTravelled = dstTravelled - fogBoxInfo.dstToBox - _FogDistance;
-        float fogDensity = _FogDensity * stepSize * pow(max(fogDistTravelled, 0), 2);
+        float fogDensity = _FogDensity * stepSize;
 
         // Sample transmittance at current pos
         float lightTransmittance = 1;
-        if (fogDensity + density > 0.005)
+        if (fogDensity + density > 0)
         {
             // TODO: not sure this improves performance because of branching
             // Directly sample texture if inside
@@ -275,7 +268,7 @@ cloudMarchResult cloudMarch(float3 rayPos, float3 rayDir, s_lightParams lightPar
         res.lightEnergy += (fogDensity + density) * res.transmittance * lightTransmittance;
         res.transmittance *= beer(fogDensity + density);
         
-        if (res.transmittance < 0.05)
+        if (res.transmittance < 0.01)
         {
             res.transmittance = 0;
             break;

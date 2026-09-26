@@ -155,7 +155,7 @@ public class CloudsPostProcess : PostProcessBase
         computeShader.SetFloats("_TransmittanceMapCoverage", new float[] { transmittanceMap.MapWidth, transmittanceMap.MapHeight, transmittanceMap.MapDepth });
 
         // Fog
-        double fogDensity = (double) cloudSettings.fogDensity / 1000000000000.0;
+        double fogDensity = (double) cloudSettings.fogDensity / 10000.0;
         computeShader.SetFloat("_FogDensity", (float) fogDensity);
         computeShader.SetFloat("_FogDistance", cloudSettings.fogDistance);
         computeShader.SetFloat("_FogStepSize", cloudSettings.fogStepSize);
