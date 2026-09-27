@@ -33,4 +33,5 @@ Explore the guides below to get started and customize your cloudscapes:
 - [Creating custom cloudscapes](Documentation/Creating%20custom%20cloudscapes.md)
 
 A technical breakdown is available on my portfolio page:
-- [Clouds in Two Milliseconds]("https://www.lix.polytechnique.fr/~foulon/#/projects/sdf-clouds")
+- [Clouds in Two Milliseconds](https://www.lix.polytechnique.fr/~foulon/#/projects/sdf-clouds)
+
