@@ -31,3 +31,6 @@ Explore the guides below to get started and customize your cloudscapes:
 - [Quick start](Documentation/Quick%20start.md)
 - [Cloud Rendering Configuration Guide](Documentation/Cloud%20Rendering%20Configuration%20Guide.md)
 - [Creating custom cloudscapes](Documentation/Creating%20custom%20cloudscapes.md)
+
+A technical breakdown is available on my portfolio page:
+- [Clouds in Two Milliseconds]("https://www.lix.polytechnique.fr/~foulon/#/projects/sdf-clouds")
